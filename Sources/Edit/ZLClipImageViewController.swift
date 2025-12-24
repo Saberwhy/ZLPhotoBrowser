@@ -43,7 +43,7 @@ extension ZLClipImageViewController {
 class ZLClipImageViewController: UIViewController {
     private static let bottomToolViewH: CGFloat = 90
     
-    private static let clipRatioItemSize = CGSize(width: 60, height: 70)
+    private static let clipRatioItemSize = CGSize(width: 60, height: 82)
     
     /// 取消裁剪时动画frame
     private var cancelClipAnimateFrame: CGRect = .zero
@@ -341,7 +341,7 @@ class ZLClipImageViewController: UIViewController {
         let ratioColViewY = bottomToolView.frame.minY - ZLClipImageViewController.clipRatioItemSize.height - 5
         rotateBtn.frame = CGRect(x: 30, y: ratioColViewY + (ZLClipImageViewController.clipRatioItemSize.height - 25) / 2, width: 25, height: 25)
         let ratioColViewX = rotateBtn.frame.maxX + 15
-        clipRatioColView.frame = CGRect(x: ratioColViewX, y: ratioColViewY, width: view.bounds.width - ratioColViewX, height: 70)
+        clipRatioColView.frame = CGRect(x: ratioColViewX, y: ratioColViewY, width: view.bounds.width - ratioColViewX, height: ZLClipImageViewController.clipRatioItemSize.height)
         
         if showRatioColView, let index = clipRatios.firstIndex(where: { $0 == self.selectedRatio }) {
             clipRatioColView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: false)
@@ -1000,8 +1000,10 @@ extension ZLClipImageViewController: UICollectionViewDataSource, UICollectionVie
         
         if ratio == selectedRatio {
             cell.titleLabel.textColor = .zl.imageEditorToolTitleTintColor
+            cell.subtitleLabel.textColor = .zl.imageEditorToolTitleTintColor
         } else {
             cell.titleLabel.textColor = .zl.imageEditorToolTitleNormalColor
+            cell.subtitleLabel.textColor = .zl.imageEditorToolTitleNormalColor
         }
         
         return cell
@@ -1089,6 +1091,17 @@ class ZLImageClipRatioCell: UICollectionViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
+        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 27, width: bounds.width, height: 12))
+        label.font = .zl.font(ofSize: 12)
+        label.textColor = .white
+        label.textAlignment = .center
+        label.layer.shadowColor = UIColor.black.withAlphaComponent(0.3).cgColor
+        label.layer.shadowOffset = .zero
+        label.layer.shadowOpacity = 1
+        return label
+    }()
+    
+    lazy var subtitleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 15, width: bounds.width, height: 12))
         label.font = .zl.font(ofSize: 12)
         label.textColor = .white
@@ -1147,11 +1160,13 @@ class ZLImageClipRatioCell: UICollectionViewCell {
     func setupUI() {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(subtitleLabel)
     }
     
     func configureCell(image: UIImage, ratio: ZLImageClipRatio) {
         imageView.image = image
         titleLabel.text = ratio.title
+        subtitleLabel.text = ratio.subtitle
         self.image = image
         self.ratio = ratio
         
