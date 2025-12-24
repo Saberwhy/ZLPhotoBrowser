@@ -435,7 +435,7 @@ open class ZLEditImageViewController: UIViewController {
         animate: Bool = false,
         image: UIImage,
         editModel: ZLEditImageModel? = nil,
-        showLoading: (() -> Void)? = nil,
+        showLoading: (() -> Void)?,
         cancel: (() -> Void)? = nil,
         completion: ((UIImage, ZLEditImageModel?) -> Void)?
     ) {

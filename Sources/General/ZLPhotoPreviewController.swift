@@ -802,7 +802,7 @@ class ZLPhotoPreviewController: UIViewController {
         let config = ZLPhotoConfiguration.default()
         let model = arrDataSources[currentIndex]
         let nav = navigationController as? ZLImageNavController
-        ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: model.editImageModel) { [weak self, weak nav] editImage, editImageModel in
+        ZLEditImageViewController.showEditImageVC(parentVC: self, image: image, editModel: model.editImageModel, showLoading: nil) { [weak self, weak nav] editImage, editImageModel in
             guard let `self` = self else { return }
             model.editImage = editImage
             model.editImageModel = editImageModel
