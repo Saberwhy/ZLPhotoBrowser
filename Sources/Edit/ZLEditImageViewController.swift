@@ -435,6 +435,7 @@ open class ZLEditImageViewController: UIViewController {
         animate: Bool = false,
         image: UIImage,
         editModel: ZLEditImageModel? = nil,
+        showLoading: (() -> Void)? = nil,
         cancel: (() -> Void)? = nil,
         completion: ((UIImage, ZLEditImageModel?) -> Void)?
     ) {
@@ -449,10 +450,12 @@ open class ZLEditImageViewController: UIViewController {
                 status: editModel?.clipStatus ?? ZLClipStatus(editRect: CGRect(origin: .zero, size: image.size))
             )
             vc.clipDoneBlock = { angle, editRect, ratio in
+                showLoading?()
                 let model = ZLEditImageModel(
                     clipStatus: ZLClipStatus(editRect: editRect, angle: angle, ratio: ratio)
                 )
-                completion?(image.zl.clipImage(angle: angle, editRect: editRect, isCircle: ratio.isCircle), model)
+                let image = image.zl.clipImage(angle: angle, editRect: editRect, isCircle: ratio.isCircle)
+                completion?(image, model)
             }
             vc.cancelClipBlock = cancel
             vc.animate = animate
