@@ -1102,7 +1102,7 @@ class ZLImageClipRatioCell: UICollectionViewCell {
     }()
     
     lazy var subtitleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 16, width: bounds.width, height: 13))
+        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 16, width: bounds.width, height: 15))
         label.font = .zl.font(ofSize: 12)
         label.textColor = .white
         label.textAlignment = .center
