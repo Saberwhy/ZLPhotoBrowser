@@ -542,8 +542,10 @@ class ZLClipImageViewController: UIViewController {
     @objc private func cancelBtnClick() {
         dismissAnimateFromRect = cancelClipAnimateFrame
         dismissAnimateImage = presentAnimateImage
-        cancelClipBlock?()
-        dismiss(animated: animate, completion: nil)
+        let com = cancelClipBlock
+        dismiss(animated: animate) {
+            com?()
+        }
     }
     
     @objc private func revertBtnClick() {
@@ -585,8 +587,14 @@ class ZLClipImageViewController: UIViewController {
                 self.clipDoneBlock?(self.angle, image.editRect, self.selectedRatio)
             }
         } else {
-            clipDoneBlock?(angle, image.editRect, selectedRatio)
-            dismiss(animated: animate, completion: nil)
+            let a = angle
+            let ed = image.editRect
+            let sele = selectedRatio
+            let com = clipDoneBlock
+//            clipDoneBlock?(angle, image.editRect, selectedRatio)
+            dismiss(animated: animate) {
+                com?(a, ed, sele)
+            }
         }
     }
     
