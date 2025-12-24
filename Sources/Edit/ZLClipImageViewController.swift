@@ -43,7 +43,7 @@ extension ZLClipImageViewController {
 class ZLClipImageViewController: UIViewController {
     private static let bottomToolViewH: CGFloat = 90
     
-    private static let clipRatioItemSize = CGSize(width: 60, height: 82)
+    private static let clipRatioItemSize = CGSize(width: 60, height: 84)
     
     /// 取消裁剪时动画frame
     private var cancelClipAnimateFrame: CGRect = .zero
@@ -1091,7 +1091,7 @@ class ZLImageClipRatioCell: UICollectionViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 27, width: bounds.width, height: 12))
+        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 28, width: bounds.width, height: 12))
         label.font = .zl.font(ofSize: 12)
         label.textColor = .white
         label.textAlignment = .center
@@ -1102,7 +1102,7 @@ class ZLImageClipRatioCell: UICollectionViewCell {
     }()
     
     lazy var subtitleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 15, width: bounds.width, height: 12))
+        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 16, width: bounds.width, height: 13))
         label.font = .zl.font(ofSize: 12)
         label.textColor = .white
         label.textAlignment = .center
