@@ -579,10 +579,12 @@ class ZLClipImageViewController: UIViewController {
     }
     
     @objc private func doneBtnClick() {
+        let hud = ZLProgressHUD.show(in: view)
         let image = clipImage()
         dismissAnimateFromRect = clipBoxFrame
         dismissAnimateImage = image.clipImage
         if presentingViewController is ZLCustomCamera {
+            hud.hide()
             dismiss(animated: animate) {
                 self.clipDoneBlock?(self.angle, image.editRect, self.selectedRatio)
             }
@@ -591,6 +593,7 @@ class ZLClipImageViewController: UIViewController {
             let ed = image.editRect
             let sele = selectedRatio
             let com = clipDoneBlock
+            hud.hide()
 //            clipDoneBlock?(angle, image.editRect, selectedRatio)
             dismiss(animated: animate) {
                 com?(a, ed, sele)
