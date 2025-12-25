@@ -221,7 +221,7 @@ class ZLClipImageViewController: UIViewController {
     
     /// 传回旋转角度，图片编辑区域的rect
     var clipDoneBlock: ((CGFloat, CGRect, ZLImageClipRatio) -> Void)?
-    
+    var showLoading: (() -> Void)?
     var cancelClipBlock: (() -> Void)?
     
     override var prefersStatusBarHidden: Bool { true }
@@ -579,24 +579,19 @@ class ZLClipImageViewController: UIViewController {
     }
     
     @objc private func doneBtnClick() {
-        print("1: ", Date().timeIntervalSince1970)
-        let hud = ZLProgressHUD.show(in: view)
+        showLoading?()
         let image = clipImage()
         dismissAnimateFromRect = clipBoxFrame
         dismissAnimateImage = image.clipImage
         if presentingViewController is ZLCustomCamera {
-            hud.hide()
             dismiss(animated: animate) {
                 self.clipDoneBlock?(self.angle, image.editRect, self.selectedRatio)
             }
         } else {
-            print("2: ", Date().timeIntervalSince1970)
             let a = angle
             let ed = image.editRect
             let sele = selectedRatio
             let com = clipDoneBlock
-            hud.hide()
-            print("3: ", Date().timeIntervalSince1970)
 //            clipDoneBlock?(angle, image.editRect, selectedRatio)
             dismiss(animated: animate) {
                 print("4: ", Date().timeIntervalSince1970)

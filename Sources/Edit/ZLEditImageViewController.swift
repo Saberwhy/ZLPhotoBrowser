@@ -449,16 +449,12 @@ open class ZLEditImageViewController: UIViewController {
                 image: image,
                 status: editModel?.clipStatus ?? ZLClipStatus(editRect: CGRect(origin: .zero, size: image.size))
             )
+            vc.showLoading = showLoading
             vc.clipDoneBlock = { angle, editRect, ratio in
-                print("4: ", Date().timeIntervalSince1970)
-                showLoading?()
-                print("7: ", Date().timeIntervalSince1970)
                 let model = ZLEditImageModel(
                     clipStatus: ZLClipStatus(editRect: editRect, angle: angle, ratio: ratio)
                 )
-                print("8: ", Date().timeIntervalSince1970)
                 let image = image.zl.clipImage(angle: angle, editRect: editRect, isCircle: ratio.isCircle)
-                print("9: ", Date().timeIntervalSince1970)
                 completion?(image, model)
             }
             vc.cancelClipBlock = cancel
