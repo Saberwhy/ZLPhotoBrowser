@@ -257,7 +257,10 @@ class ZLClipImageViewController: UIViewController {
             editImage = image
         }
         var firstEnter = false
-        if let ratio = status.ratio {
+        if status.isFirst, let ratio = status.ratio {
+            firstEnter = true
+            selectedRatio = ratio
+        } else if let ratio = status.ratio {
             selectedRatio = ratio
         } else {
             firstEnter = true

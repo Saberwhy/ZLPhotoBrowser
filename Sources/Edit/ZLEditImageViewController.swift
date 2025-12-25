@@ -30,11 +30,16 @@ public struct ZLClipStatus {
     public var editRect: CGRect
     public var angle: CGFloat = 0
     public var ratio: ZLImageClipRatio?
+    public var isFirst: Bool
     
-    public init(editRect: CGRect, angle: CGFloat = 0, ratio: ZLImageClipRatio? = nil) {
+    public init(editRect: CGRect,
+                angle: CGFloat = 0,
+                ratio: ZLImageClipRatio? = nil,
+                isFirst: Bool = false) {
         self.editRect = editRect
         self.angle = angle
         self.ratio = ratio
+        self.isFirst = isFirst
     }
 }
 
