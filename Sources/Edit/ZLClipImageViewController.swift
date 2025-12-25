@@ -579,6 +579,7 @@ class ZLClipImageViewController: UIViewController {
     }
     
     @objc private func doneBtnClick() {
+        print("1: ", Date().timeIntervalSince1970)
         let hud = ZLProgressHUD.show(in: view)
         let image = clipImage()
         dismissAnimateFromRect = clipBoxFrame
@@ -589,13 +590,16 @@ class ZLClipImageViewController: UIViewController {
                 self.clipDoneBlock?(self.angle, image.editRect, self.selectedRatio)
             }
         } else {
+            print("2: ", Date().timeIntervalSince1970)
             let a = angle
             let ed = image.editRect
             let sele = selectedRatio
             let com = clipDoneBlock
             hud.hide()
+            print("3: ", Date().timeIntervalSince1970)
 //            clipDoneBlock?(angle, image.editRect, selectedRatio)
             dismiss(animated: animate) {
+                print("4: ", Date().timeIntervalSince1970)
                 com?(a, ed, sele)
             }
         }
