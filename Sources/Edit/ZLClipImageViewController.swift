@@ -594,7 +594,6 @@ class ZLClipImageViewController: UIViewController {
             let com = clipDoneBlock
 //            clipDoneBlock?(angle, image.editRect, selectedRatio)
             dismiss(animated: animate) {
-                print("4: ", Date().timeIntervalSince1970)
                 com?(a, ed, sele)
             }
         }
