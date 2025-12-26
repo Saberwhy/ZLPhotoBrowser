@@ -688,6 +688,7 @@ class ZLClipImageViewController: UIViewController {
             }
             
             updateClipBoxFrame(point: point)
+            revertBtn.isEnabled = true
         } else if pan.state == .cancelled || pan.state == .ended {
             panEdge = .none
             startTimer()
