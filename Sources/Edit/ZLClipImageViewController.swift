@@ -43,7 +43,7 @@ extension ZLClipImageViewController {
 class ZLClipImageViewController: UIViewController {
     private static let bottomToolViewH: CGFloat = 90
     
-    private static let clipRatioItemSize = CGSize(width: 60, height: 84)
+    private static let clipRatioItemSize = CGSize(width: 60, height: 86)
     
     /// 取消裁剪时动画frame
     private var cancelClipAnimateFrame: CGRect = .zero
@@ -142,6 +142,7 @@ class ZLClipImageViewController: UIViewController {
         btn.enlargeInset = 20
         btn.titleLabel?.font = ZLLayout.bottomToolTitleFont
         btn.addTarget(self, action: #selector(revertBtnClick), for: .touchUpInside)
+        btn.isHidden = true
         return btn
     }()
     
@@ -579,6 +580,7 @@ class ZLClipImageViewController: UIViewController {
         
         generateThumbnailImage()
         clipRatioColView.reloadData()
+        revertBtn.isHidden = true
     }
     
     @objc private func doneBtnClick() {
@@ -1034,7 +1036,7 @@ extension ZLClipImageViewController: UICollectionViewDataSource, UICollectionVie
         
         configFakeAnimateImageView()
         layoutInitialImage(animate: true)
-        
+        revertBtn.isHidden = true
         let toFrame = view.convert(containerView.frame, from: mainScrollView)
         animateFakeImageView {
             self.fakeAnimateImageView.frame = toFrame
@@ -1055,6 +1057,7 @@ extension ZLClipImageViewController: UIScrollViewDelegate {
         guard scrollView == mainScrollView else {
             return
         }
+        revertBtn.isHidden = scrollView.zoomScale == 0
         if !scrollView.isDragging {
             startTimer()
         }
@@ -1103,7 +1106,7 @@ class ZLImageClipRatioCell: UICollectionViewCell {
     }()
     
     lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 28, width: bounds.width, height: 12))
+        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 30, width: bounds.width, height: 15))
         label.font = .zl.font(ofSize: 12)
         label.textColor = .white
         label.textAlignment = .center
@@ -1114,7 +1117,7 @@ class ZLImageClipRatioCell: UICollectionViewCell {
     }()
     
     lazy var subtitleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 16, width: bounds.width, height: 15))
+        let label = UILabel(frame: CGRect(x: 0, y: bounds.height - 15, width: bounds.width, height: 15))
         label.font = .zl.font(ofSize: 12)
         label.textColor = .white
         label.textAlignment = .center
