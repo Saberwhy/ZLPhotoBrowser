@@ -138,11 +138,12 @@ class ZLClipImageViewController: UIViewController {
     private lazy var revertBtn: ZLEnlargeButton = {
         let btn = ZLEnlargeButton(type: .custom)
         btn.setTitleColor(.white, for: .normal)
+        btn.setTitleColor(.gray, for: .disabled)
         btn.setTitle(localLanguageTextValue(.revert), for: .normal)
         btn.enlargeInset = 20
         btn.titleLabel?.font = ZLLayout.bottomToolTitleFont
         btn.addTarget(self, action: #selector(revertBtnClick), for: .touchUpInside)
-        btn.isHidden = true
+        btn.isEnabled = false
         return btn
     }()
     
@@ -580,7 +581,7 @@ class ZLClipImageViewController: UIViewController {
         
         generateThumbnailImage()
         clipRatioColView.reloadData()
-        revertBtn.isHidden = true
+        revertBtn.isEnabled = false
     }
     
     @objc private func doneBtnClick() {
@@ -1036,7 +1037,7 @@ extension ZLClipImageViewController: UICollectionViewDataSource, UICollectionVie
         
         configFakeAnimateImageView()
         layoutInitialImage(animate: true)
-        revertBtn.isHidden = true
+        revertBtn.isEnabled = false
         let toFrame = view.convert(containerView.frame, from: mainScrollView)
         animateFakeImageView {
             self.fakeAnimateImageView.frame = toFrame
@@ -1057,7 +1058,7 @@ extension ZLClipImageViewController: UIScrollViewDelegate {
         guard scrollView == mainScrollView else {
             return
         }
-        revertBtn.isHidden = scrollView.zoomScale == 0
+        revertBtn.isEnabled = scrollView.zoomScale != 0
         if !scrollView.isDragging {
             startTimer()
         }
