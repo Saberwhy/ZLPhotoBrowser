@@ -190,6 +190,8 @@ class ZLClipImageViewController: UIViewController {
     private var clipBoxFrame: CGRect = .zero
     
     private var clipOriginFrame: CGRect = .zero
+    private var clipFirstFrame: CGRect = .zero
+    private var firstZoomScale: CGFloat = -1
     
     private var isAnimate = false
     
@@ -468,6 +470,9 @@ class ZLClipImageViewController: UIViewController {
         mainScrollView.maximumZoomScale = 10
         // 设置当前zoom scale
         let zoomScale = clipRectZoomScale * originalScale
+        if firstZoomScale == -1 {
+            firstZoomScale = zoomScale
+        }
         mainScrollView.zoomScale = zoomScale
         mainScrollView.contentSize = CGSize(width: editImage.size.width * zoomScale, height: editImage.size.height * zoomScale)
         
@@ -521,6 +526,9 @@ class ZLClipImageViewController: UIViewController {
 //        frame.size.height = floor(max(self.minClipSize.height, min(frame.height, maxH)))
         
         clipBoxFrame = frame
+        if clipFirstFrame == .zero {
+            clipFirstFrame = clipBoxFrame
+        }
         overlayView.updateLayers(frame, animate: animate, endEditing: endEditing)
         
         if updateInset {
@@ -644,6 +652,7 @@ class ZLClipImageViewController: UIViewController {
         
         generateThumbnailImage()
         clipRatioColView.reloadData()
+        revertBtn.isEnabled = true
     }
     
     /// 图片旋转、还原、切换比例时，用来动画的view
@@ -688,7 +697,7 @@ class ZLClipImageViewController: UIViewController {
             }
             
             updateClipBoxFrame(point: point)
-            revertBtn.isEnabled = true
+            revertBtn.isEnabled = clipFirstFrame != clipBoxFrame || mainScrollView.zoomScale != firstZoomScale
         } else if pan.state == .cancelled || pan.state == .ended {
             panEdge = .none
             startTimer()
@@ -1030,7 +1039,8 @@ extension ZLClipImageViewController: UICollectionViewDataSource, UICollectionVie
         guard ratio != selectedRatio, !isAnimate else {
             return
         }
-        
+        firstZoomScale = -1
+        clipFirstFrame = .zero
         selectedRatio = ratio
         clipRatioColView.reloadData()
         clipRatioColView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
