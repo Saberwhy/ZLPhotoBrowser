@@ -439,6 +439,7 @@ open class ZLEditImageViewController: UIViewController {
         parentVC: UIViewController?,
         animate: Bool = false,
         image: UIImage,
+        isHiddenBottomToolLine: Bool = false,
         editModel: ZLEditImageModel? = nil,
         showLoading: (() -> Void)?,
         cancel: (() -> Void)? = nil,
@@ -452,7 +453,8 @@ open class ZLEditImageViewController: UIViewController {
            tools.contains(.clip) {
             let vc = ZLClipImageViewController(
                 image: image,
-                status: editModel?.clipStatus ?? ZLClipStatus(editRect: CGRect(origin: .zero, size: image.size))
+                status: editModel?.clipStatus ?? ZLClipStatus(editRect: CGRect(origin: .zero, size: image.size)),
+                isHiddenBottomToolLine: isHiddenBottomToolLine
             )
             vc.showLoading = showLoading
             vc.clipDoneBlock = { angle, editRect, ratio in

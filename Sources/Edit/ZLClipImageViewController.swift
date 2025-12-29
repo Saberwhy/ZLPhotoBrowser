@@ -123,6 +123,7 @@ class ZLClipImageViewController: UIViewController {
     private lazy var bottomToolLineView: UIView = {
         let view = UIView()
         view.backgroundColor = .zl.rgba(240, 240, 240)
+        view.isHidden = isHiddenBottomToolLine
         return view
     }()
     
@@ -228,6 +229,8 @@ class ZLClipImageViewController: UIViewController {
     var showLoading: (() -> Void)?
     var cancelClipBlock: (() -> Void)?
     
+    let isHiddenBottomToolLine: Bool
+    
     override var prefersStatusBarHidden: Bool { true }
     
     override var prefersHomeIndicatorAutoHidden: Bool { true }
@@ -244,8 +247,11 @@ class ZLClipImageViewController: UIViewController {
         cleanTimer()
     }
     
-    init(image: UIImage, status: ZLClipStatus) {
+    init(image: UIImage,
+         status: ZLClipStatus,
+         isHiddenBottomToolLine: Bool = false) {
         originalImage = image
+        self.isHiddenBottomToolLine = isHiddenBottomToolLine
         let configuration = ZLPhotoConfiguration.default().editImageConfiguration
         clipRatios = configuration.clipRatios
         editRect = status.editRect
