@@ -1,7 +1,7 @@
 [![Version](https://img.shields.io/github/v/tag/longitachi/ZLPhotoBrowser.svg?color=blue&include_prereleases=&sort=semver)](https://cocoapods.org/pods/ZLPhotoBrowser)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![SPM supported](https://img.shields.io/badge/SwiftPM-supported-E57141.svg)](https://swift.org/package-manager/)
-[![License](https://img.shields.io/badge/license-MIT-black)](https://raw.githubusercontent.com/longitachi/ZLPhotoBrowser/master/LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-black)](https://raw.githubusercontent.com/longitachi/ZLPhotoBrowser/master/LICENSE)
 [![Platform](https://img.shields.io/badge/Platforms-iOS-blue?style=flat)](https://img.shields.io/badge/Platforms-iOS-blue?style=flat)
 ![Language](https://img.shields.io/badge/Language-%20Swift%20-E57141.svg)
 [![Usage](https://img.shields.io/badge/Usage-Doc-yarn?style=flat)](https://github.com/longitachi/ZLPhotoBrowser/wiki/How-to-use-(Swift))
@@ -104,6 +104,10 @@ ZLPhotoBrowser是一款微信样式的图片选择器，支持预览/相册内�
 ### 更新日志
 > [更多更新日志](https://github.com/longitachi/ZLPhotoBrowser/blob/master/CHANGELOG.md)
 ```
+● 4.7.4
+  Add:
+    支持同时编辑多个视频
+    开源协议由MIT改为Apache-2.0
 ● 4.7.3
   Fix:
     修复编辑图片时，橡皮擦位置显示不正确的问题
@@ -116,14 +120,6 @@ ZLPhotoBrowser是一款微信样式的图片选择器，支持预览/相册内�
     修改ZLPhotoPreviewSheet的权限为private
   Fix:
     修复权限为"limited"时，小图界面UI可能显示错误的bug
-● 4.7.0.1
-  Add:
-    支持分页加载。
-    小图界面支持边缘侧滑返回。
-    提供一个block，外界可以通过该block去控制是否允许进入相机。
-    替换一些过期的API。
-    ZLImagePreviewController中更多的类型支持长按手势，并允许给网络视频设置封面图。
-    ZLImagePreviewController界面支持禁止下拉返回手势。
 ...
 ```
 
@@ -148,7 +144,7 @@ ZLPhotoBrowser是一款微信样式的图片选择器，支持预览/相册内�
   
 * Swift Package Manager
   * 1. 选择 File > Swift Packages > Add Package Dependency，输入 `https://github.com/longitachi/ZLPhotoBrowser.git`
-  * 2. 输入对应版本号（SPM 最低版本为 `4.7.3`）
+  * 2. 输入对应版本号（SPM 最低版本为 `4.7.4`）
   * 3. 等Xcode下载完成后确定即可
 
 ### 支持
