@@ -110,8 +110,6 @@ public class ZLPhotoUIConfiguration: NSObject {
     /// The minimum spacing to use between items in the same row for `ZLThumbnailViewController`.
     public var minimumInteritemSpacing: CGFloat = 2
     
-    public var collectionViewContentBottom: CGFloat = 0
-    
     /// The minimum spacing to use between lines of items in the grid for `ZLThumbnailViewController`.
     public var minimumLineSpacing: CGFloat = 2
     

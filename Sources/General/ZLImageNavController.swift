@@ -66,4 +66,21 @@ public class ZLImageNavController: UINavigationController {
 
         // Do any additional setup after loading the view.
     }
+    
+    /// 更新 collectionView bottom
+    public func updateBottom(bottom: CGFloat) {
+        if let vc = viewControllers.first(where:  { $0 is ZLThumbnailViewController }) as? ZLThumbnailViewController {
+            var bottom = vc.collectionView.contentInset.bottom + bottom
+            if bottom < 0 {
+                bottom = 0
+            }
+            vc.collectionView.contentInset = UIEdgeInsets(
+                top: vc.collectionView.contentInset.top,
+                left: vc.collectionView.contentInset.left,
+                bottom: bottom,
+                right: vc.collectionView.contentInset.right)
+        }
+        
+    }
+    
 }
