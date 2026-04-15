@@ -330,7 +330,7 @@ class ZLThumbnailViewController: UIViewController {
         } else if showBottomToolBtns {
             bottomViewH = ZLLayout.bottomToolViewH + bottom
         } else {
-            bottomViewH = 0 + bottom
+            bottomViewH = bottom
         }
         
         if let noAuthTipsView {
