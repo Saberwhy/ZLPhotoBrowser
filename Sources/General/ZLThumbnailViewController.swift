@@ -321,15 +321,16 @@ class ZLThumbnailViewController: UIViewController {
         embedAlbumListView?.frame = CGRect(x: 0, y: navViewFrame.maxY, width: view.bounds.width, height: view.bounds.height - navViewFrame.maxY)
         
         let showBottomToolBtns = shouldShowBottomToolBar()
+        let bottom = ZLPhotoUIConfiguration.default().bottomSpacing
         let bottomViewH: CGFloat
         if showLimitAuthTipsView, showBottomToolBtns {
-            bottomViewH = ZLLayout.bottomToolViewH + ZLLimitedAuthorityTipsView.height
+            bottomViewH = ZLLayout.bottomToolViewH + ZLLimitedAuthorityTipsView.height + bottom
         } else if showLimitAuthTipsView {
-            bottomViewH = ZLLimitedAuthorityTipsView.height
+            bottomViewH = ZLLimitedAuthorityTipsView.height + bottom
         } else if showBottomToolBtns {
-            bottomViewH = ZLLayout.bottomToolViewH
+            bottomViewH = ZLLayout.bottomToolViewH + bottom
         } else {
-            bottomViewH = 0
+            bottomViewH = 0 + bottom
         }
         
         if let noAuthTipsView {
