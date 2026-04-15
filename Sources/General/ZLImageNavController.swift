@@ -70,14 +70,14 @@ public class ZLImageNavController: UINavigationController {
     /// 更新 collectionView bottom
     public func updateBottom(bottom: CGFloat) {
         if let vc = viewControllers.first(where:  { $0 is ZLThumbnailViewController }) as? ZLThumbnailViewController {
-            var bottom = vc.collectionView.contentInset.bottom + bottom
-            if bottom < 0 {
-                bottom = 0
+            var currentBottom = vc.collectionView.contentInset.bottom + bottom
+            if currentBottom < 0 {
+                currentBottom = 0
             }
             vc.collectionView.contentInset = UIEdgeInsets(
                 top: vc.collectionView.contentInset.top,
                 left: vc.collectionView.contentInset.left,
-                bottom: bottom,
+                bottom: currentBottom,
                 right: vc.collectionView.contentInset.right)
         }
         
