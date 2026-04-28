@@ -443,6 +443,7 @@ open class ZLEditImageViewController: UIViewController {
         editModel: ZLEditImageModel? = nil,
         showLoading: (() -> Void)?,
         cancel: (() -> Void)? = nil,
+        revert: (() -> Void)? = nil,
         completion: ((UIImage, ZLEditImageModel?) -> Void)?
     ) {
         let tools = ZLPhotoConfiguration.default().editImageConfiguration.tools
@@ -465,6 +466,7 @@ open class ZLEditImageViewController: UIViewController {
                 completion?(image, model)
             }
             vc.cancelClipBlock = cancel
+            vc.revertBlock = revert
             vc.animate = animate
             vc.modalPresentationStyle = .fullScreen
             parentVC?.present(vc, animated: animate, completion: nil)

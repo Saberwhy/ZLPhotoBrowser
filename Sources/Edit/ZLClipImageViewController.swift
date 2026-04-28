@@ -228,6 +228,7 @@ class ZLClipImageViewController: UIViewController {
     var clipDoneBlock: ((CGFloat, CGRect, ZLImageClipRatio) -> Void)?
     var showLoading: (() -> Void)?
     var cancelClipBlock: (() -> Void)?
+    var revertBlock: (() -> Void)?
     
     let isHiddenBottomToolLine: Bool
     
@@ -569,7 +570,7 @@ class ZLClipImageViewController: UIViewController {
     
     @objc private func revertBtnClick() {
         guard !isAnimate else { return }
-        
+        revertBlock?()
         configFakeAnimateImageView()
         let revertAngle: CGFloat
         // 如果角度最终效果是顺时针旋转了90度，还原时候就逆时针旋转，否则就顺时针旋转
