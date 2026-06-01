@@ -438,9 +438,9 @@ open class ZLEditImageViewController: UIViewController {
     @objc public class func showEditImageVC(
         parentVC: UIViewController?,
         animate: Bool = false,
-        sizeCheck: (() -> Bool)? = nil,
+        sizeCheck: ((CGSize) -> Bool)? = nil,
         image: UIImage,
-        compareRatioCheck: (() -> Bool)? = nil,
+        compareRatioCheck: ((CGSize) -> Bool)? = nil,
         isHiddenBottomToolLine: Bool = false,
         editModel: ZLEditImageModel? = nil,
         showLoading: (() -> Void)?,
