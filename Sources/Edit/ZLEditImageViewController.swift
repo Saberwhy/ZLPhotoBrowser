@@ -438,7 +438,9 @@ open class ZLEditImageViewController: UIViewController {
     @objc public class func showEditImageVC(
         parentVC: UIViewController?,
         animate: Bool = false,
+        sizeCheck: (() -> Bool)? = nil,
         image: UIImage,
+        compareRatioCheck: (() -> Bool)? = nil,
         isHiddenBottomToolLine: Bool = false,
         editModel: ZLEditImageModel? = nil,
         showLoading: (() -> Void)?,
@@ -457,6 +459,8 @@ open class ZLEditImageViewController: UIViewController {
                 status: editModel?.clipStatus ?? ZLClipStatus(editRect: CGRect(origin: .zero, size: image.size)),
                 isHiddenBottomToolLine: isHiddenBottomToolLine
             )
+            vc.sizeCheck = sizeCheck
+            vc.compareRatioCheck = compareRatioCheck
             vc.showLoading = showLoading
             vc.clipDoneBlock = { angle, editRect, ratio in
                 let model = ZLEditImageModel(

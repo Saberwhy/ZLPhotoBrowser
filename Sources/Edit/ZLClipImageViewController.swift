@@ -226,6 +226,10 @@ class ZLClipImageViewController: UIViewController {
     
     /// 传回旋转角度，图片编辑区域的rect
     var clipDoneBlock: ((CGFloat, CGRect, ZLImageClipRatio) -> Void)?
+    /// true 正常
+    var sizeCheck: (() -> Bool)?
+    /// true 正常
+    var compareRatioCheck: (() -> Bool)?
     var showLoading: (() -> Void)?
     var cancelClipBlock: (() -> Void)?
     var revertBlock: (() -> Void)?
@@ -604,6 +608,12 @@ class ZLClipImageViewController: UIViewController {
         let image = clipImage()
         dismissAnimateFromRect = clipBoxFrame
         dismissAnimateImage = image.clipImage
+        if let res = sizeCheck?(), !res {
+            return
+        }
+        if let res = compareRatioCheck?(), !res {
+            return
+        }
         if presentingViewController is ZLCustomCamera {
             dismiss(animated: animate) {
                 self.clipDoneBlock?(self.angle, image.editRect, self.selectedRatio)
@@ -613,7 +623,6 @@ class ZLClipImageViewController: UIViewController {
             let ed = image.editRect
             let sele = selectedRatio
             let com = clipDoneBlock
-//            clipDoneBlock?(angle, image.editRect, selectedRatio)
             dismiss(animated: animate) {
                 com?(a, ed, sele)
             }
