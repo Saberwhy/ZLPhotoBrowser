@@ -26,7 +26,7 @@
 
 import UIKit
 
-extension ZLPhotoBrowserWrapper where Base: UIGraphicsImageRenderer {
+public extension ZLPhotoBrowserWrapper where Base: UIGraphicsImageRenderer {
     static func renderImage(
         size: CGSize,
         formatConfig: ((UIGraphicsImageRendererFormat) -> Void)? = nil,
